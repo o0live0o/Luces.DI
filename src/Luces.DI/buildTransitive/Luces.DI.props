@@ -1,0 +1,7 @@
+<Project>
+    <!-- Carried with the package so consumers can forward the two properties below to the source generator. -->
+    <ItemGroup>
+        <CompilerVisibleProperty Include="DiRegistrationNamespace" />
+        <CompilerVisibleProperty Include="AutoDiSingleResolveServices" />
+    </ItemGroup>
+</Project>

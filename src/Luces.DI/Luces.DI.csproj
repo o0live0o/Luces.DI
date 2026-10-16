@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Shipped as an independent NuGet package; the version travels with the package and is not constrained by the host repository's Directory.Packages.props -->
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <IsPublishable>false</IsPublishable>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <RootNamespace>Luces.DI</RootNamespace>
+        <AssemblyName>Luces.DI</AssemblyName>
+        <NoWarn>$(NoWarn);RS1041;RS2008</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageId>Luces.DI</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Anonymous</Authors>
+        <Description>DI Tools</Description>
+        <PackageTags>di;dependency-injection;source-generator;roslyn;ms.di;aot</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.9.0" PrivateAssets="all">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Templates\**\*.cs" />
+        <EmbeddedResource Include="Templates\**\*.cs"
+                          LogicalName="Luces.DI.Templates.%(Filename)%(Extension)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="buildTransitive\Luces.DI.props" Pack="true" PackagePath="buildTransitive\$(PackageId).props" Visible="false" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+version: 2
+
+updates:
+  - package-ecosystem: nuget
+    directory: /src/Luces.DI
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+    groups:
+      # The analyzer API and the compiler API are released together; keep them in one pull request.
+      roslyn:
+        patterns:
+          - Microsoft.CodeAnalysis*
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore(ci)
